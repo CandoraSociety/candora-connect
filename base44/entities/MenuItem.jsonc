@@ -1,0 +1,57 @@
+{
+  "name": "MenuItem",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the menu item"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the item"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "appetizer",
+        "entree",
+        "side",
+        "dessert",
+        "beverage",
+        "breakfast",
+        "lunch_special",
+        "catering"
+      ],
+      "description": "Item category"
+    },
+    "price": {
+      "type": "number",
+      "description": "Selling price"
+    },
+    "cost": {
+      "type": "number",
+      "description": "Cost to make"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Image of the item"
+    },
+    "is_available": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether item is currently available"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags like vegan, gluten-free, etc."
+    }
+  },
+  "required": [
+    "name",
+    "price",
+    "category"
+  ]
+}

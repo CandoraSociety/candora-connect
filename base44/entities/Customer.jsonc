@@ -1,0 +1,56 @@
+{
+  "name": "Customer",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Customer full name"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "total_orders": {
+      "type": "number",
+      "default": 0,
+      "description": "Total number of orders"
+    },
+    "total_spent": {
+      "type": "number",
+      "default": 0,
+      "description": "Lifetime spending"
+    },
+    "last_order_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of most recent order"
+    },
+    "preferred_order_type": {
+      "type": "string",
+      "enum": [
+        "dine_in",
+        "takeout",
+        "catering",
+        "delivery",
+        "kiosk"
+      ],
+      "description": "Most common order type"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Special notes about customer"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags like VIP, corporate, regular"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

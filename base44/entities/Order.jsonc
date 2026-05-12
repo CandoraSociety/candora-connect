@@ -1,0 +1,100 @@
+{
+  "name": "Order",
+  "type": "object",
+  "properties": {
+    "customer_name": {
+      "type": "string",
+      "description": "Customer name"
+    },
+    "customer_email": {
+      "type": "string",
+      "description": "Customer email"
+    },
+    "customer_phone": {
+      "type": "string",
+      "description": "Customer phone"
+    },
+    "order_type": {
+      "type": "string",
+      "enum": [
+        "dine_in",
+        "takeout",
+        "catering",
+        "delivery",
+        "kiosk"
+      ],
+      "description": "Type of order"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "preparing",
+        "ready",
+        "completed",
+        "cancelled"
+      ],
+      "default": "pending",
+      "description": "Order status"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "menu_item_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number"
+          },
+          "price": {
+            "type": "number"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Items in the order"
+    },
+    "subtotal": {
+      "type": "number",
+      "description": "Subtotal before tax"
+    },
+    "tax": {
+      "type": "number",
+      "description": "Tax amount"
+    },
+    "total": {
+      "type": "number",
+      "description": "Total amount"
+    },
+    "event_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Event date for catering orders"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Special instructions"
+    },
+    "payment_method": {
+      "type": "string",
+      "enum": [
+        "cash",
+        "card",
+        "square",
+        "invoice"
+      ],
+      "description": "Payment method used"
+    }
+  },
+  "required": [
+    "customer_name",
+    "order_type"
+  ]
+}

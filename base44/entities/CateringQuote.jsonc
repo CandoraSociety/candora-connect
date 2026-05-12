@@ -1,0 +1,110 @@
+{
+  "name": "CateringQuote",
+  "type": "object",
+  "properties": {
+    "customer_name": {
+      "type": "string",
+      "description": "Client name"
+    },
+    "customer_email": {
+      "type": "string"
+    },
+    "customer_phone": {
+      "type": "string"
+    },
+    "event_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of event"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "corporate",
+        "wedding",
+        "birthday",
+        "funeral",
+        "holiday",
+        "community",
+        "fundraiser",
+        "other"
+      ],
+      "description": "Type of event"
+    },
+    "guest_count": {
+      "type": "number",
+      "description": "Number of guests"
+    },
+    "service_style": {
+      "type": "string",
+      "enum": [
+        "buffet",
+        "plated",
+        "family_style",
+        "boxed_meals",
+        "food_stations",
+        "cocktail"
+      ],
+      "description": "Service style"
+    },
+    "dietary_requirements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Dietary needs like vegan, gluten-free, halal"
+    },
+    "selected_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "menu_item_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "price_per_person": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "number"
+          }
+        }
+      },
+      "description": "Items selected for the quote"
+    },
+    "estimated_ingredient_cost": {
+      "type": "number",
+      "description": "Estimated cost of ingredients based on current inventory prices"
+    },
+    "subtotal": {
+      "type": "number"
+    },
+    "service_fee": {
+      "type": "number"
+    },
+    "total": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "sent",
+        "accepted",
+        "declined"
+      ],
+      "default": "draft"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "customer_name",
+    "event_type",
+    "guest_count"
+  ]
+}

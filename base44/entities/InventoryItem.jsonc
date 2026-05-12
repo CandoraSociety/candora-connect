@@ -1,0 +1,68 @@
+{
+  "name": "InventoryItem",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Ingredient/item name"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "produce",
+        "dairy",
+        "meat",
+        "seafood",
+        "dry_goods",
+        "spices",
+        "beverages",
+        "frozen",
+        "packaging",
+        "other"
+      ],
+      "description": "Inventory category"
+    },
+    "quantity": {
+      "type": "number",
+      "description": "Current quantity on hand"
+    },
+    "unit": {
+      "type": "string",
+      "enum": [
+        "lbs",
+        "oz",
+        "gal",
+        "each",
+        "cases",
+        "bags",
+        "boxes",
+        "liters",
+        "kg"
+      ],
+      "description": "Unit of measurement"
+    },
+    "unit_cost": {
+      "type": "number",
+      "description": "Cost per unit"
+    },
+    "reorder_level": {
+      "type": "number",
+      "description": "Minimum quantity before reorder alert"
+    },
+    "supplier": {
+      "type": "string",
+      "description": "Supplier name"
+    },
+    "is_low_stock": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether item is below reorder level"
+    }
+  },
+  "required": [
+    "name",
+    "category",
+    "quantity",
+    "unit"
+  ]
+}
