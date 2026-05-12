@@ -17,6 +17,7 @@ import RecipeEditor from './pages/RecipeEditor';
 import CateringQuotes from './pages/CateringQuotes';
 import CateringQuoteBuilder from './pages/CateringQuoteBuilder';
 import Customers from './pages/Customers';
+import CateringRequest from './pages/CateringRequest';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -57,6 +58,7 @@ const AuthenticatedApp = () => {
         <Route path="/catering/new" element={<CateringQuoteBuilder />} />
         <Route path="/customers" element={<Customers />} />
       </Route>
+      <Route path="/catering-request" element={<CateringRequest />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
