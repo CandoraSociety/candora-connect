@@ -12,8 +12,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { ArrowLeft, Plus, Trash2, Users, DollarSign, Package, Sparkles, Pencil } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import PresetPackages, { PRESET_PACKAGES } from '@/components/catering/PresetPackages';
-import AddOnServices from '@/components/catering/AddOnServices';
+import PresetPackages, { PRESET_PACKAGES } from '../components/catering/PresetPackages';
+import AddOnServices from '../components/catering/AddOnServices';
 
 const EVENT_TYPES = ['corporate', 'wedding', 'birthday', 'funeral', 'holiday', 'community', 'fundraiser', 'other'];
 const SERVICE_STYLES = ['buffet', 'plated', 'family_style', 'boxed_meals', 'food_stations', 'cocktail'];
