@@ -28,12 +28,10 @@
         "community",
         "fundraiser",
         "other"
-      ],
-      "description": "Type of event"
+      ]
     },
     "guest_count": {
-      "type": "number",
-      "description": "Number of guests"
+      "type": "number"
     },
     "service_style": {
       "type": "string",
@@ -44,15 +42,17 @@
         "boxed_meals",
         "food_stations",
         "cocktail"
-      ],
-      "description": "Service style"
+      ]
     },
     "dietary_requirements": {
       "type": "array",
       "items": {
         "type": "string"
-      },
-      "description": "Dietary needs like vegan, gluten-free, halal"
+      }
+    },
+    "preset_package": {
+      "type": "string",
+      "description": "Name of the selected preset catering package, if any"
     },
     "selected_items": {
       "type": "array",
@@ -70,14 +70,39 @@
           },
           "quantity": {
             "type": "number"
+          },
+          "is_custom": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": "string"
           }
         }
-      },
-      "description": "Items selected for the quote"
+      }
+    },
+    "addons": {
+      "type": "array",
+      "description": "Add-on services like full-service staffing, bartending, beverages, etc.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "number"
+          }
+        }
+      }
     },
     "estimated_ingredient_cost": {
-      "type": "number",
-      "description": "Estimated cost of ingredients based on current inventory prices"
+      "type": "number"
     },
     "subtotal": {
       "type": "number"
