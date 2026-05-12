@@ -4,9 +4,11 @@ import { queryClientInstance } from '@/lib/query-client'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
+import { hasRole, ROUTE_PERMISSIONS } from '@/lib/roles';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 
 import AppLayout from './components/layout/AppLayout';
+import AccessDenied from './components/layout/AccessDenied';
 import Dashboard from './pages/Dashboard';
 import MenuItems from './pages/MenuItems';
 import Orders from './pages/Orders';
@@ -18,6 +20,15 @@ import CateringQuotes from './pages/CateringQuotes';
 import CateringQuoteBuilder from './pages/CateringQuoteBuilder';
 import Customers from './pages/Customers';
 import CateringRequest from './pages/CateringRequest';
+
+const RoleRoute = ({ path, element }) => {
+  const { user } = useAuth();
+  const required = ROUTE_PERMISSIONS[path];
+  if (required && !hasRole(user?.role || 'staff', required)) {
+    return <AccessDenied />;
+  }
+  return element;
+};
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -47,16 +58,16 @@ const AuthenticatedApp = () => {
   return (
     <Routes>
       <Route element={<AppLayout />}>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/menu" element={<MenuItems />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/inventory" element={<Inventory />} />
-        <Route path="/recipes" element={<Recipes />} />
-        <Route path="/recipes/new" element={<RecipeEditor />} />
-        <Route path="/recipes/:id" element={<RecipeDetail />} />
-        <Route path="/catering" element={<CateringQuotes />} />
-        <Route path="/catering/new" element={<CateringQuoteBuilder />} />
-        <Route path="/customers" element={<Customers />} />
+        <Route path="/" element={<RoleRoute path="/" element={<Dashboard />} />} />
+        <Route path="/menu" element={<RoleRoute path="/menu" element={<MenuItems />} />} />
+        <Route path="/orders" element={<RoleRoute path="/orders" element={<Orders />} />} />
+        <Route path="/inventory" element={<RoleRoute path="/inventory" element={<Inventory />} />} />
+        <Route path="/recipes" element={<RoleRoute path="/recipes" element={<Recipes />} />} />
+        <Route path="/recipes/new" element={<RoleRoute path="/recipes" element={<RecipeEditor />} />} />
+        <Route path="/recipes/:id" element={<RoleRoute path="/recipes" element={<RecipeDetail />} />} />
+        <Route path="/catering" element={<RoleRoute path="/catering" element={<CateringQuotes />} />} />
+        <Route path="/catering/new" element={<RoleRoute path="/catering" element={<CateringQuoteBuilder />} />} />
+        <Route path="/customers" element={<RoleRoute path="/customers" element={<Customers />} />} />
       </Route>
       <Route path="/catering-request" element={<CateringRequest />} />
       <Route path="*" element={<PageNotFound />} />

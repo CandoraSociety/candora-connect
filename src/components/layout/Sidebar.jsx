@@ -10,9 +10,12 @@ import {
   Users, 
   ChevronLeft,
   ChevronRight,
-  Menu
+  Menu,
+  LogOut
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/lib/AuthContext';
+import { hasRole, ROUTE_PERMISSIONS, ROLE_LABELS } from '@/lib/roles';
 
 const navItems = [
   { icon: LayoutDashboard, label: 'Dashboard', path: '/' },
@@ -28,6 +31,12 @@ export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { user, logout } = useAuth();
+  const userRole = user?.role || 'staff';
+  const visibleNavItems = navItems.filter(item => {
+    const required = ROUTE_PERMISSIONS[item.path];
+    return required ? hasRole(userRole, required) : true;
+  });
 
   return (
     <>
@@ -70,7 +79,7 @@ export default function Sidebar() {
 
         {/* Navigation */}
         <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
-          {navItems.map((item) => {
+          {visibleNavItems.map((item) => {
             const isActive = location.pathname === item.path || 
               (item.path !== '/' && location.pathname.startsWith(item.path));
             return (
@@ -93,6 +102,23 @@ export default function Sidebar() {
             );
           })}
         </nav>
+
+        {/* User info + logout */}
+        <div className="p-3 border-t border-sidebar-border space-y-1">
+          {!collapsed && user && (
+            <div className="px-3 py-2">
+              <p className="text-xs font-medium text-sidebar-foreground truncate">{user.full_name || user.email}</p>
+              <p className="text-[10px] text-sidebar-foreground/50 capitalize">{ROLE_LABELS[userRole] || userRole}</p>
+            </div>
+          )}
+          <button
+            onClick={() => logout()}
+            className="flex items-center gap-3 px-3 py-2 rounded-lg w-full text-sidebar-foreground/50 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
+          >
+            <LogOut className="w-4 h-4 flex-shrink-0" />
+            {!collapsed && <span className="text-sm">Sign Out</span>}
+          </button>
+        </div>
 
         {/* Collapse toggle */}
         <button
