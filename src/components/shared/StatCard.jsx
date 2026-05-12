@@ -25,7 +25,7 @@ export default function StatCard({ title, value, subtitle, icon: Icon, trend, cl
           {trend > 0 ? '↑' : '↓'} {Math.abs(trend)}% from last period
         </p>
       )}
-      <div className="absolute -bottom-4 -right-4 w-24 h-24 rounded-full bg-primary/5 group-hover:bg-primary/10 transition-colors" />
+      <div className="absolute -bottom-4 -right-4 w-24 h-24 rounded-full bg-primary/5 group-hover:bg-primary/10 transition-colors pointer-events-none" />
     </Card>
   );
 }
