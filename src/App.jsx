@@ -6,6 +6,7 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import { hasRole, ROUTE_PERMISSIONS } from '@/lib/roles';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
+import { useBranding } from '@/hooks/useBranding';
 
 import AppLayout from './components/layout/AppLayout';
 import AccessDenied from './components/layout/AccessDenied';
@@ -32,6 +33,7 @@ const RoleRoute = ({ path, element }) => {
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
+  useBranding();
 
   if (isLoadingPublicSettings || isLoadingAuth) {
     return (
